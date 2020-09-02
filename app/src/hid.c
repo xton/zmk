@@ -14,32 +14,58 @@ static struct zmk_hid_consumer_report consumer_report = {
     .body = {
         .keys = {0,0,0,0,0,0}}};
 
-#define _TOGGLE_MOD(mod, state)                      \
-    if (modifier > MOD_RGUI)                         \
-    {                                                \
-        return -EINVAL;                              \
-    }                                                \
-    WRITE_BIT(kp_report.body.modifiers, mod, state); \
-    return 0;
+// Keep track of how often a modifier was pressed.
+// Only release the modifier iff the count is 0.
+static int modifier_counts[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 int zmk_hid_register_mod(zmk_mod modifier)
 {
-    _TOGGLE_MOD(modifier, true);
+    modifier_counts[modifier]++;
+    WRITE_BIT(kp_report.body.modifiers, modifier, true);
+    return 0;
 }
+
 int zmk_hid_unregister_mod(zmk_mod modifier)
 {
-    _TOGGLE_MOD(modifier, false);
+    if(modifier >= 8) {
+        LOG_ERR("This modifier does not exist %d", modifier);
+        return -EINVAL;
+    }
+    if(modifier_counts[modifier] <= 0) {
+        LOG_ERR("Tried to unregister modifier %d too often", modifier);
+        return -EINVAL;
+    }
+    modifier_counts[modifier]--;
+    if (modifier_counts[modifier] == 0) {
+        LOG_DBG("Modifier %d released.", modifier);
+        WRITE_BIT(kp_report.body.modifiers, modifier, false);
+    }
+    return 0;
 }
 
 int zmk_hid_register_mods(zmk_mod_flags modifiers)
 {
-    kp_report.body.modifiers |= modifiers;
+    for(int modifier = 0; modifier < 8; modifier++) {
+        if ((modifiers >> modifier) & 1) {
+            int ret;
+            if((ret = zmk_hid_register_mod(modifier)) < 0) {
+                return ret;
+            }
+        }
+    }
     return 0;
 }
 
 int zmk_hid_unregister_mods(zmk_mod_flags modifiers)
 {
-    kp_report.body.modifiers &= ~modifiers;
+    for(int modifier = 0; modifier < 8; modifier++) {
+        if ((modifiers >> modifier) & 1) {
+            int ret;
+            if((ret = zmk_hid_unregister_mod(modifier)) < 0) {
+                return ret;
+            }
+        }
+    }
     return 0;
 }
 

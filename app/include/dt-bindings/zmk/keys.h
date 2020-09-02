@@ -147,3 +147,4 @@
 #define MOD_RSFT (1 << 0x05)
 #define MOD_RALT (1 << 0x06)
 #define MOD_RGUI (1 << 0x07)
+#define MOD_LAST_MODIFIER MOD_RGUI
