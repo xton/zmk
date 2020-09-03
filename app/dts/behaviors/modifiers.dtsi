@@ -2,36 +2,36 @@
 
 / {
 	behaviors {
-		ctl: behavior_ctl {
+		lctl: behavior_ctl {
 			compatible = "zmk,behavior-key-press";
 			label = "MOD_CTRL";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_LCTL)>;
+            modifiers = <(LCTL)>;
 		};
 
-		sft: behavior_sft {
+		lsft: behavior_sft {
 			compatible = "zmk,behavior-key-press";
 			label = "MOD_SHIFT";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_LSFT)>;
+            modifiers = <(LSFT)>;
 		};
 
-		alt: behavior_alt {
+		lalt: behavior_alt {
 			compatible = "zmk,behavior-key-press";
 			label = "MOD_ALT";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_LALT)>;
+            modifiers = <(LALT)>;
 		};
 
-		gui: behavior_gui {
+		lgui: behavior_gui {
 			compatible = "zmk,behavior-key-press";
 			label = "MOD_GUI";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_LALT)>;
+            modifiers = <(LALT)>;
 		};
 
 
@@ -40,7 +40,7 @@
 			label = "RCTL";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_RCTL)>;
+            modifiers = <(RCTL)>;
 		};
 
 		rsft: behavior_rsft {
@@ -48,7 +48,7 @@
 			label = "RSFT";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_RALT)>;
+            modifiers = <(RALT)>;
 		};
 
 		ralt: behavior_ralt {
@@ -56,7 +56,7 @@
 			label = "RALT";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_RALT)>;
+            modifiers = <(RALT)>;
 		};
 
 		rgui: behavior_rgui {
@@ -64,15 +64,15 @@
 			label = "RGUI";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_RGUI)>;
+            modifiers = <(RGUI)>;
 		};
 
-		ctl_alt: behavior_ctl_alt {
+		lctl_lalt: behavior_ctl_alt {
 			compatible = "zmk,behavior-key-press";
 			label = "CTL_ALT";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_LCTL | MOD_LALT)>;
+            modifiers = <(LCTL | LALT)>;
 		};
 
 		meh: behavior_meh {
@@ -80,7 +80,7 @@
 			label = "MEH";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_LCTL | MOD_LSFT | MOD_LALT)>;
+            modifiers = <(LCTL | LSFT | LALT)>;
 		};
 
 		hypr: behavior_hypr {
@@ -88,7 +88,7 @@
 			label = "HYPR";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(MOD_LCTL | MOD_LSFT | MOD_LALT | MOD_LGUI)>;
+            modifiers = <(LCTL | LSFT | LALT | LGUI)>;
 		};
 	};
 };

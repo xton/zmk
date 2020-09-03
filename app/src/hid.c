@@ -45,10 +45,10 @@ int zmk_hid_unregister_mod(zmk_mod modifier)
 
 int zmk_hid_register_mods(zmk_mod_flags modifiers)
 {
-    for(int modifier = 0; modifier < 8; modifier++) {
-        if ((modifiers >> modifier) & 1) {
+    for(int i = 0; i < 8; i++) {
+        if ((modifiers >> i) & 1) {
             int ret;
-            if((ret = zmk_hid_register_mod(modifier)) < 0) {
+            if((ret = zmk_hid_register_mod(i)) < 0) {
                 return ret;
             }
         }
@@ -58,10 +58,10 @@ int zmk_hid_register_mods(zmk_mod_flags modifiers)
 
 int zmk_hid_unregister_mods(zmk_mod_flags modifiers)
 {
-    for(int modifier = 0; modifier < 8; modifier++) {
-        if ((modifiers >> modifier) & 1) {
+    for(int i = 0; i < 8; i++) {
+        if ((modifiers >> i) & 1) {
             int ret;
-            if((ret = zmk_hid_unregister_mod(modifier)) < 0) {
+            if((ret = zmk_hid_unregister_mod(i)) < 0) {
                 return ret;
             }
         }
@@ -101,12 +101,18 @@ int zmk_hid_unregister_mods(zmk_mod_flags modifiers)
 
 int zmk_hid_keypad_press(zmk_key code)
 {
-    if (code >= LCTL && code <= RGUI)
-    {
-        return zmk_hid_register_mod(code - LCTL);
+    zmk_mod_flags mods = SELECT_MODS(code);
+    if (mods) {
+        return zmk_hid_register_mods(mods);
+    }
+    code = STRIP_MODS(code);
+
+    if (code == 0) 
+    { 
+        //only modifiers
+        return 0;
     }
 
-   
     if (code > ZMK_HID_MAX_KEYCODE)
     {
         return -EINVAL;
@@ -121,9 +127,17 @@ int zmk_hid_keypad_press(zmk_key code)
 
 int zmk_hid_keypad_release(zmk_key code)
 {
-    if (code >= LCTL && code <= RGUI)
-    {
-        return zmk_hid_unregister_mod(code - LCTL);
+    zmk_mod_flags mods = SELECT_MODS(code);
+    if (mods) {
+        return zmk_hid_unregister_mod(mods);
+    }
+    code = STRIP_MODS(code);
+
+
+    if (code == 0) 
+    { 
+        //only modifiers
+        return 0;
     }
 
     if (code > ZMK_HID_MAX_KEYCODE)

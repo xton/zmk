@@ -19,10 +19,9 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 static int hid_listener_keycode_pressed(u8_t usage_page, u32_t keycode)
 {
   int err;
-  LOG_DBG("usage_page 0x%02X keycode 0x%02X", usage_page, keycode);
-  
   switch (usage_page) {
   case USAGE_KEYPAD:
+    LOG_DBG("usage_page 0x%02X keycode 0x%02X mods 0x%02X", usage_page, STRIP_MODS(keycode), SELECT_MODS(keycode));
     err = zmk_hid_keypad_press(keycode);
     if (err) {
       LOG_ERR("Unable to press keycode");
@@ -30,6 +29,7 @@ static int hid_listener_keycode_pressed(u8_t usage_page, u32_t keycode)
     }
     break;
   case USAGE_CONSUMER:
+    LOG_DBG("usage_page 0x%02X keycode 0x%02X", usage_page, keycode);
     err = zmk_hid_consumer_press(keycode);
     if (err) {
       LOG_ERR("Unable to press keycode");
@@ -44,10 +44,9 @@ static int hid_listener_keycode_pressed(u8_t usage_page, u32_t keycode)
 static int hid_listener_keycode_released(u8_t usage_page, u32_t keycode)
 {
   int err;
-  LOG_DBG("usage_page 0x%02X keycode 0x%02X", usage_page, keycode);
-  
   switch (usage_page) {
   case USAGE_KEYPAD:
+    LOG_DBG("usage_page 0x%02X keycode 0x%02X mods 0x%02X", usage_page, STRIP_MODS(keycode), SELECT_MODS(keycode));
     err = zmk_hid_keypad_release(keycode);
     if (err) {
       LOG_ERR("Unable to release keycode");
@@ -55,6 +54,7 @@ static int hid_listener_keycode_released(u8_t usage_page, u32_t keycode)
     }
     break;
   case USAGE_CONSUMER:
+    LOG_DBG("usage_page 0x%02X keycode 0x%02X", usage_page, keycode);
     err = zmk_hid_consumer_release(keycode);
     if (err) {
       LOG_ERR("Unable to release keycode");
