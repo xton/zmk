@@ -19,7 +19,7 @@
 
 		default_layer {
 			bindings = <
-				&sft A &sft B
+				&lsft A &lsft B
 				&kp D &kp G
 			>;
 		};
