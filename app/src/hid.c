@@ -15,7 +15,7 @@ static struct zmk_hid_consumer_report consumer_report = {
         .keys = {0,0,0,0,0,0}}};
 
 // Keep track of how often a modifier was pressed.
-// Only release the modifier iff the count is 0.
+// Only release the modifier if the count is 0.
 static int modifier_counts[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 int zmk_hid_register_mod(zmk_mod modifier)
