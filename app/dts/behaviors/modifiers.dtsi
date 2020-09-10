@@ -31,7 +31,7 @@
 			label = "MOD_GUI";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(LALT)>;
+            modifiers = <(LGUI)>;
 		};
 
 
@@ -48,7 +48,7 @@
 			label = "RSFT";
 			usage_page = <USAGE_KEYPAD>;
 			#binding-cells = <1>;
-            modifiers = <(RALT)>;
+            modifiers = <(RSFT)>;
 		};
 
 		ralt: behavior_ralt {

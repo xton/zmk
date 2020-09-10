@@ -105,7 +105,7 @@ int zmk_hid_keypad_press(zmk_key code)
 {
     zmk_mod_flags mods = SELECT_MODS(code);
     if (mods) {
-        return zmk_hid_register_mods(mods);
+        zmk_hid_register_mods(mods);
     }
     code = STRIP_MODS(code);
 
