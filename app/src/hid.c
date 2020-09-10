@@ -21,6 +21,7 @@ static int modifier_counts[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 int zmk_hid_register_mod(zmk_mod modifier)
 {
     modifier_counts[modifier]++;
+    LOG_DBG("Modifier %d count %d", modifier, modifier_counts[modifier]);
     WRITE_BIT(kp_report.body.modifiers, modifier, true);
     return 0;
 }
@@ -36,8 +37,9 @@ int zmk_hid_unregister_mod(zmk_mod modifier)
         return -EINVAL;
     }
     modifier_counts[modifier]--;
+    LOG_DBG("Modifier %d count: %d", modifier, modifier_counts[modifier]);
     if (modifier_counts[modifier] == 0) {
-        LOG_DBG("Modifier %d released.", modifier);
+        LOG_DBG("Modifier %d released", modifier);
         WRITE_BIT(kp_report.body.modifiers, modifier, false);
     }
     return 0;
@@ -129,7 +131,7 @@ int zmk_hid_keypad_release(zmk_key code)
 {
     zmk_mod_flags mods = SELECT_MODS(code);
     if (mods) {
-        return zmk_hid_unregister_mod(mods);
+        return zmk_hid_unregister_mods(mods);
     }
     code = STRIP_MODS(code);
 
