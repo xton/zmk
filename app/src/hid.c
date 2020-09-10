@@ -131,7 +131,7 @@ int zmk_hid_keypad_release(zmk_key code)
 {
     zmk_mod_flags mods = SELECT_MODS(code);
     if (mods) {
-        return zmk_hid_unregister_mods(mods);
+        zmk_hid_unregister_mods(mods);
     }
     code = STRIP_MODS(code);
 
