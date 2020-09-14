@@ -27,7 +27,7 @@
         lower_layer {
             bindings = <
 &lsft GRAV &lsft NUM_1 &lsft NUM_2 &lsft NUM_3 &lsft NUM_4 &lsft NUM_5                    &lsft NUM_6 &lsft NUM_7 &lsft NUM_8 &lsft NUM_9 &lsft NUM_0 &trans
-&trans   &none     &none     &none     &none     &none                        &kp HOME  &kp   PGDN  &kp   PGUP  &kp   END   &none       &lsft BSLH
+&trans   &none     &lgui LBKT     &lgui_lsft LBKT     &lgui_lsft RBKT     &lgui RBKT                        &kp HOME  &kp   PGDN  &kp   PGUP  &kp   END   &none       &lsft BSLH
 &trans   &none     &none     &none     &none     &none                        &none     &lsft MINUS &lsft EQL   &lsft LBKT  &lsft RBKT  &trans
                                        &kp LGUI  &trans      &kp LSFT         &trans    &kp RALT
             >;
@@ -36,8 +36,17 @@
             bindings = <
 &kp GRAV &kp NUM_1 &kp NUM_2 &kp NUM_3 &kp NUM_4 &kp NUM_5                    &kp NUM_6 &kp NUM_7 &kp NUM_8 &kp NUM_9 &kp NUM_0 &trans
 &trans   &none     &none     &none     &none     &none                        &kp LARW  &kp DARW  &kp UARW  &kp RARW  &none     &kp BSLH
-&bootloader   &reset     &none     &none     &none     &none                        &none     &kp MINUS &kp EQL   &kp LBKT  &kp RBKT  &trans
+&trans   &bootloader     &reset     &none     &none     &none                        &none     &kp MINUS &kp EQL   &kp LBKT  &kp RBKT  &trans
                                        &kp LGUI  &trans      &kp LSFT         &trans    &kp RALT
+            >;
+        };
+
+        adjust_layer {
+            bindings = <
+&bootloader &reset &none     &none &kp NUM_4 &kp NUM_5                    &kp NUM_6 &kp NUM_7 &kp NUM_8 &kp NUM_9 &kp NUM_0 &trans
+&trans   &none     &none     &none     &none     &none                        &lalt LARW  &lalt DARW  &lalt UARW  &lalt RARW  &none     &none
+&trans   &none     &none     &none     &none     &none                        &none     &kp MINUS &kp EQL   &kp LBKT  &kp RBKT  &trans
+                                       &trans    &trans      &none         &trans    &trans
             >;
         };
 

@@ -52,12 +52,12 @@
     };
 
     behaviors {
-      asft: behavior_asft {
+      lgui_lsft: behavior_lgui_lsft {
         compatible = "zmk,behavior-key-press";
-        label = "asft";
+        label = "LGUI_LSFT";
         usage_page = <USAGE_KEYPAD>;
         #binding-cells = <1>;
-            modifiers = <(LSFT | LALT)>;
+        modifiers = <(LGUI | LSFT)>;
       };
 
     };
