@@ -6,4 +6,6 @@ if SHIELD_REVIUNG41
 config ZMK_KEYBOARD_NAME
     default "Reviung41"
 
+# CONFIG_ZMK_BLE_CLEAR_BONDS_ON_START=y
+
 endif
